@@ -3,7 +3,8 @@
 import matplotlib.pyplot as plt
 from shapely.geometry import Polygon
 
-def plot_mask_and_save_image2(title, gdf, img, output_name=None, bbox=None):
+# General image plotting functions
+def plot_mask_and_save_image(title, gdf, img, cmap, output_name=None, bbox=None):
     if bbox is not None:
         # Crop the image to the bounding box
         cropped_img = img[bbox[1]:bbox[3], bbox[0]:bbox[2]]
@@ -11,12 +12,12 @@ def plot_mask_and_save_image2(title, gdf, img, output_name=None, bbox=None):
         cropped_img = img
 
     # Plot options
-    fig, ax = plt.subplots(figsize=(12, 12))
+    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
 
     # Plot the cropped image
-    ax.imshow(cropped_img, cmap='gray', origin='lower')
-    ax.set_title(title)
-    ax.axis('off')
+    axes[0].imshow(cropped_img, cmap='gray', origin='lower')
+    axes[0].set_title(title)
+    axes[0].axis('off')
 
     # Create filtering polygon
     if bbox is not None:
@@ -25,15 +26,16 @@ def plot_mask_and_save_image2(title, gdf, img, output_name=None, bbox=None):
         intersects_bbox = gdf['geometry'].intersects(bbox_polygon)
         filtered_gdf = gdf[intersects_bbox]
     else:
-        filtered_gdf = gdf
+        filtered_gdf=gdf
 
-    # Overlay the filtered polygons on the image
-    for poly in filtered_gdf['geometry']:
-        x, y = poly.exterior.xy
-        ax.plot(x, y, color='red', linewidth=1)  # Change color and linewidth as needed
+    # Plot the filtered polygons on the second axis
+    filtered_gdf.plot(cmap=cmap, ax=axes[1])
+    axes[1].axis('off')
+    axes[1].legend(loc='upper left', bbox_to_anchor=(1.05, 1))
+
 
     # Save the plot if output_name is provided
     if output_name is not None:
-        plt.savefig(output_name, bbox_inches='tight')
+        plt.savefig(output_name, bbox_inches='tight')  # Use bbox_inches='tight' to include the legend
     else:
         plt.show()
