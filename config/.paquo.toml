@@ -1,0 +1,25 @@
+# current paquo configuration
+# ===========================
+# format: TOML
+qupath_dir = ""
+qupath_search_dirs = [
+    "/opt",
+    "/Applications",
+    "c:/Program Files",
+    "/usr/local",
+    "~/Applications",
+    "~/AppData/Local",
+    "~",
+]
+qupath_search_dir_regex = "(?i)qupath.*"
+qupath_search_conda = true
+qupath_prefer_conda = true
+java_opts = [
+    "-XX:MaxRAMPercentage=50",
+]
+safe_truncate = true
+jvm_path_override = ""
+mock_backend = false
+cli_force_log_level_error = true
+warn_microsoft_store_python = true
+
