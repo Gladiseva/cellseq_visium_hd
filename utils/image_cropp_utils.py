@@ -34,7 +34,7 @@ def read_image(image_path):
     return img
 
 def crop_image(img, first_barcode_pxl_row, first_barcode_pxl_col, last_barcode_pxl_row, last_barcode_pxl_col):
-    cropped_img = img[last_barcode_pxl_row:first_barcode_pxl_row, first_barcode_pxl_col:last_barcode_pxl_col]
+    cropped_img = img[first_barcode_pxl_row:last_barcode_pxl_row, first_barcode_pxl_col:last_barcode_pxl_col]
     return cropped_img
 
 def save_image_as_btf(cropped_img, output_path):
