@@ -15,7 +15,7 @@ def segment_image(cropped_img):
     # Predict instances using the model
     labels, polys = model.predict_instances_big(img,
                                                 axes='YXC',
-                                                block_size=2000,
+                                                block_size=1000,
                                                 prob_thresh=0.01,
                                                 nms_thresh=0.001,
                                                 min_overlap=128,
