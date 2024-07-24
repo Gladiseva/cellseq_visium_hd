@@ -12,7 +12,7 @@ def plot_mask_and_save_image(title, gdf, img, cmap, output_name=None, bbox=None)
         cropped_img = img
 
     # Plot options
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(8, 4))
 
     # Plot the cropped image
     axes[0].imshow(cropped_img, cmap='gray', origin='lower')
