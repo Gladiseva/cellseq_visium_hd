@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 from shapely.geometry import Polygon
+from matplotlib.colors import ListedColormap
 
 # General image plotting functions
 def plot_mask_and_save_image(title, gdf, img, cmap, output_name=None, bbox=None):
