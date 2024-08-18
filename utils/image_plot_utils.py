@@ -63,7 +63,7 @@ def plot_gene_and_save_image(title, gdf, gene, img, adata, bbox=None, output_nam
 
 
     # Find a gene of interest and merge with the geodataframe
-    gene_expression = adata[:, gene].to_df()
+    gene_expression = adata.var.loc[gene].to_df()
     gene_expression['id'] = gene_expression.index
     merged_gdf = gdf.merge(gene_expression, left_on='id', right_on='id')
 
