@@ -117,7 +117,7 @@ df_tissue_positions = df_tissue_positions.set_index('barcode')
 df_tissue_positions['index']=df_tissue_positions.index
 
 # Adding the tissue positions to the meta data
-adata.obs =  pd.merge(adata.obs, df_tissue_positions, left_index=True, right_index=True)
+adata.obs = pd.merge(adata.obs, df_tissue_positions, left_index=True, right_index=True)
 
 # Create a GeoDataFrame from the DataFrame of coordinates
 geometry = [Point(xy) for xy in zip(df_tissue_positions['pxl_col_in_fullres'], df_tissue_positions['pxl_row_in_fullres'])]
