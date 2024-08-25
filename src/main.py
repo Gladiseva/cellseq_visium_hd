@@ -11,35 +11,35 @@ from config import Config
 
 def main():
     # Step 1: Load and process the image
-    print("Start: loading image")
+    print("Starting: loading image + normalization")
     img = load_image()
     img = normalize_image(img, Config.MIN_PERCENTILE, Config.MAX_PERCENTILE)
     save_image(img)
-    print("Finish: image loaded")
+    print("Finished: image loaded and normalized")
 
     # Step 2: Perform nuclei segmentation
-    print("Start: performing nuclei segmentation")
+    print("Starting: performing nuclei segmentation")
     segmentation_model = NucleiSegmentation()
     gdf = segmentation_model.segment_nuclei(img)
     gdf['area'] = gdf['geometry'].area
-    print("Finish: nuclei segmented")
+    print("Finished: nuclei segmented")
 
     # Step 3: Load and filter AnnData
-    print("Start: processing and filtering andata")
+    print("Starting: processing and filtering andata")
     adata = process_ann_data()
     filtered_adata = filter_adata_by_area_and_counts(adata, gdf)
-    print("Finish: pprocessed andata")
+    print("Finished: pprocessed andata")
 
     # Step 4: Perform clustering
-    print("Start: performing clustering")
+    print("Starting: performing clustering")
     perform_leiden_clustering(filtered_adata, resolution=Config.CLUSTER_RESOLUTION)
-    print("Finish: clustering performed")
+    print("Finished: clustering performed")
 
     # Step 5: Visualize and save results
-    print("Start: visualising results")
+    print("Startung: visualising results")
     plot_mask_and_save_image("Region of Interest 1", gdf, img, adata)
     plot_clusters_and_save_image("Region of Interest 1", gdf, img, filtered_adata)
-    print("Finish: pipeline finished")
+    print("Finished: pipeline finished")
 
 if __name__ == '__main__':
     main()
